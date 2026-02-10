@@ -1,8 +1,0 @@
-# requirements.txt - LORD NELLY OTP BOT - All the filthy dependencies you need
-# Run: pip install -r requirements.txt   (or let Pterodactyl do it on startup)
-
-telethon==1.37.0                # Telegram client library - handles your bot with real API ID/Hash
-beautifulsoup4==4.12.3          # Parses the HTML from ivasms dashboard like a fucking pro
-aiohttp==3.10.5                 # Async HTTP client for fetching fresh proxy lists from your sources
-undetected-chromedriver==3.5.5  # Stealth Chrome driver that laughs at Cloudflare detection in 2026
-selenium==4.25.0                # Core Selenium bindings (undetected-chromedriver depends on it)
