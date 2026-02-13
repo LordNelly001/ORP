@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Initiation Acknowledged - Shadow Lurkers</title>
+    <title>☠ INITIATION RECEIVED - SHADOW LURKERS ☠</title>
     <style>
         * {
             margin: 0;
@@ -12,216 +12,953 @@
         }
         
         body {
-            background: #000000;
-            color: #e0e0e0;
-            font-family: 'Courier New', monospace;
             min-height: 100vh;
-            display: flex;
-            align-items: center;
-            justify-content: center;
+            font-family: 'Courier New', monospace;
             overflow: hidden;
             position: relative;
         }
-        
-        .success-container {
-            max-width: 800px;
-            padding: 2rem;
-            text-align: center;
-            position: relative;
-            z-index: 10;
+
+        /* ===== TERRIFYING BACKGROUND LAYER ===== */
+        .horror-bg {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -10;
         }
-        
-        .success-title {
-            font-size: 2.8rem;
-            color: #ff003c;
-            text-shadow: 0 0 20px #ff003c;
-            margin-bottom: 2rem;
-            animation: pulse 2s infinite;
-        }
-        
-        @keyframes pulse {
-            0%, 100% { opacity: 1; }
-            50% { opacity: 0.8; }
-        }
-        
-        .success-message {
-            background: rgba(20, 0, 40, 0.8);
-            border: 1px solid #ff003c;
-            padding: 2rem;
-            margin: 2rem 0;
-            box-shadow: 0 0 30px rgba(255, 0, 60, 0.3);
-        }
-        
-        .oat-display {
-            font-family: monospace;
-            font-size: 1.8rem;
-            color: #ff3366;
-            margin: 1rem 0;
-            letter-spacing: 2px;
-            text-shadow: 0 0 10px rgba(255, 51, 102, 0.5);
-            word-break: break-all;
-        }
-        
-        .moniker-display {
-            font-family: monospace;
-            font-size: 1.5rem;
-            color: #c77dff;
-            margin: 1rem 0;
-            letter-spacing: 1px;
-        }
-        
-        .instructions {
-            color: #c77dff;
-            line-height: 1.8;
-            margin: 1.5rem 0;
-            font-size: 1.1rem;
-        }
-        
-        .seal {
-            font-size: 3.5rem;
-            color: #ff003c;
-            margin: 1.5rem 0;
-            animation: rotate 10s infinite linear;
-        }
-        
-        @keyframes rotate {
-            from { transform: rotate(0deg); }
-            to { transform: rotate(360deg); }
-        }
-        
-        .warning {
-            color: #888;
-            font-size: 0.9rem;
-            margin-top: 2rem;
-            border-top: 1px solid #330033;
-            padding-top: 1rem;
-        }
-        
-        /* Background effects */
-        .bg-effects {
+
+        .bg-image {
             position: absolute;
             top: 0;
             left: 0;
             width: 100%;
             height: 100%;
-            z-index: 1;
+            background-image: url('https://i.ibb.co/3515rVy5/file-1439.jpg');
+            background-size: cover;
+            background-position: center;
+            filter: brightness(0.2) contrast(1.5) saturate(1.2);
+            animation: slowZoom 60s infinite alternate;
         }
-        
-        .particle {
+
+        @keyframes slowZoom {
+            0% { transform: scale(1); }
+            100% { transform: scale(1.1); }
+        }
+
+        .blood-overlay {
             position: absolute;
-            width: 2px;
-            height: 2px;
-            background: #ff003c;
-            border-radius: 50%;
-            animation: float 5s infinite linear;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: radial-gradient(circle at 50% 50%, transparent 0%, rgba(0, 0, 0, 0.7) 100%),
+                        repeating-linear-gradient(45deg, 
+                            rgba(255, 0, 60, 0.03) 0px, 
+                            rgba(255, 0, 60, 0.03) 10px,
+                            transparent 10px, 
+                            transparent 20px);
+            pointer-events: none;
         }
-        
-        @keyframes float {
-            0% { transform: translateY(100vh) translateX(0); opacity: 0; }
-            10% { opacity: 1; }
-            90% { opacity: 1; }
-            100% { transform: translateY(-100px) translateX(100px); opacity: 0; }
+
+        .veil-pulse {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: radial-gradient(circle at var(--x, 50%) var(--y, 50%), 
+                        rgba(255, 0, 60, 0.15) 0%, 
+                        transparent 50%);
+            animation: pulseMove 8s infinite alternate;
+            pointer-events: none;
         }
-        
+
+        @keyframes pulseMove {
+            0% { opacity: 0.3; }
+            50% { opacity: 0.6; }
+            100% { opacity: 0.3; }
+        }
+
+        /* ===== FLOATING HORROR ELEMENTS ===== */
+        .floating-skull {
+            position: fixed;
+            font-size: 4rem;
+            color: rgba(255, 0, 60, 0.1);
+            animation: floatSkull 20s infinite linear;
+            z-index: -5;
+            pointer-events: none;
+            filter: blur(2px);
+        }
+
+        @keyframes floatSkull {
+            0% {
+                transform: translateY(100vh) translateX(0) rotate(0deg);
+                opacity: 0;
+            }
+            10% {
+                opacity: 0.3;
+            }
+            90% {
+                opacity: 0.3;
+            }
+            100% {
+                transform: translateY(-100px) translateX(100px) rotate(360deg);
+                opacity: 0;
+            }
+        }
+
+        .floating-ghost {
+            position: fixed;
+            font-size: 3rem;
+            color: rgba(199, 125, 255, 0.08);
+            animation: floatGhost 25s infinite reverse;
+            z-index: -4;
+            pointer-events: none;
+        }
+
+        @keyframes floatGhost {
+            0% {
+                transform: translateY(100vh) translateX(0) scale(0.5);
+                opacity: 0;
+            }
+            20% {
+                opacity: 0.2;
+            }
+            80% {
+                opacity: 0.2;
+            }
+            100% {
+                transform: translateY(-200px) translateX(-100px) scale(1.5);
+                opacity: 0;
+            }
+        }
+
+        .blood-drip {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: repeating-linear-gradient(180deg, 
+                        transparent, 
+                        transparent 20px,
+                        rgba(255, 0, 60, 0.02) 20px,
+                        rgba(255, 0, 60, 0.02) 22px);
+            pointer-events: none;
+            animation: drip 3s linear infinite;
+            z-index: -3;
+        }
+
+        @keyframes drip {
+            0% { background-position: 0 0; }
+            100% { background-position: 0 30px; }
+        }
+
+        /* ===== MAIN CONTAINER ===== */
+        .success-container {
+            position: relative;
+            max-width: 800px;
+            margin: 5vh auto;
+            padding: 2rem;
+            z-index: 10;
+            animation: containerAppear 2s ease-out;
+        }
+
+        @keyframes containerAppear {
+            0% {
+                opacity: 0;
+                transform: translateY(50px) scale(0.9);
+            }
+            100% {
+                opacity: 1;
+                transform: translateY(0) scale(1);
+            }
+        }
+
+        /* ===== RITUAL SEAL ===== */
+        .ritual-seal {
+            text-align: center;
+            margin-bottom: 2rem;
+            position: relative;
+        }
+
+        .seal-glow {
+            font-size: 5rem;
+            color: #ff003c;
+            text-shadow: 
+                0 0 30px #ff003c,
+                0 0 60px #ff003c,
+                0 0 90px #c77dff;
+            animation: sealPulse 3s infinite;
+            filter: drop-shadow(0 0 20px rgba(255, 0, 60, 0.5));
+        }
+
+        @keyframes sealPulse {
+            0%, 100% {
+                transform: scale(1);
+                text-shadow: 0 0 30px #ff003c, 0 0 60px #ff003c;
+            }
+            50% {
+                transform: scale(1.1);
+                text-shadow: 0 0 50px #ff003c, 0 0 90px #c77dff, 0 0 120px #ff003c;
+            }
+        }
+
+        /* ===== MAIN CARD ===== */
+        .horror-card {
+            background: rgba(5, 0, 10, 0.85);
+            backdrop-filter: blur(10px);
+            border: 2px solid #ff003c;
+            padding: 3rem;
+            position: relative;
+            box-shadow: 
+                0 0 50px rgba(255, 0, 60, 0.3),
+                inset 0 0 30px rgba(255, 0, 60, 0.2);
+            animation: cardGlow 4s infinite;
+        }
+
+        @keyframes cardGlow {
+            0%, 100% { box-shadow: 0 0 50px rgba(255, 0, 60, 0.3), inset 0 0 30px rgba(255, 0, 60, 0.2); }
+            50% { box-shadow: 0 0 80px rgba(255, 0, 60, 0.5), inset 0 0 50px rgba(255, 0, 60, 0.3); }
+        }
+
+        .horror-card::before {
+            content: '';
+            position: absolute;
+            top: -2px;
+            left: -2px;
+            right: -2px;
+            bottom: -2px;
+            border: 2px solid transparent;
+            border-image: repeating-linear-gradient(45deg, #ff003c, #c77dff, #ff003c) 30;
+            animation: borderRotate 4s linear infinite;
+            pointer-events: none;
+        }
+
+        @keyframes borderRotate {
+            0% { border-image-source: repeating-linear-gradient(0deg, #ff003c, #c77dff, #ff003c); }
+            100% { border-image-source: repeating-linear-gradient(360deg, #ff003c, #c77dff, #ff003c); }
+        }
+
+        .horror-card::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: repeating-linear-gradient(0deg, 
+                        transparent, 
+                        transparent 2px,
+                        rgba(255, 0, 60, 0.03) 2px,
+                        rgba(255, 0, 60, 0.03) 4px);
+            pointer-events: none;
+            animation: scanline 8s linear infinite;
+        }
+
+        @keyframes scanline {
+            0% { transform: translateY(-100%); }
+            100% { transform: translateY(100%); }
+        }
+
+        /* ===== GLITCH TITLE ===== */
+        .glitch-title {
+            font-size: 2.8rem;
+            color: #ff003c;
+            text-align: center;
+            margin-bottom: 2rem;
+            position: relative;
+            animation: glitchText 3s infinite;
+        }
+
+        .glitch-title::before,
+        .glitch-title::after {
+            content: attr(data-text);
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: transparent;
+        }
+
+        .glitch-title::before {
+            left: 2px;
+            text-shadow: -2px 0 #c77dff;
+            animation: glitch-anim-1 2s infinite linear alternate-reverse;
+        }
+
+        .glitch-title::after {
+            left: -2px;
+            text-shadow: 2px 0 #00ffff;
+            animation: glitch-anim-2 3s infinite linear alternate-reverse;
+        }
+
+        @keyframes glitchText {
+            0%, 100% { transform: translate(0); }
+            20% { transform: translate(-2px, 2px); }
+            40% { transform: translate(2px, -2px); }
+            60% { transform: translate(-1px, 1px); }
+            80% { transform: translate(1px, -1px); }
+        }
+
+        @keyframes glitch-anim-1 {
+            0%, 100% { clip: rect(0, 900px, 0, 0); }
+            20% { clip: rect(10px, 900px, 30px, 0); }
+            40% { clip: rect(20px, 900px, 40px, 0); }
+            60% { clip: rect(30px, 900px, 50px, 0); }
+            80% { clip: rect(40px, 900px, 60px, 0); }
+        }
+
+        @keyframes glitch-anim-2 {
+            0%, 100% { clip: rect(0, 900px, 0, 0); }
+            20% { clip: rect(30px, 900px, 60px, 0); }
+            40% { clip: rect(40px, 900px, 70px, 0); }
+            60% { clip: rect(50px, 900px, 80px, 0); }
+            80% { clip: rect(60px, 900px, 90px, 0); }
+        }
+
+        /* ===== OAT DISPLAY - TERRIFYING ===== */
+        .oat-container {
+            background: rgba(0, 0, 0, 0.7);
+            border: 1px solid #ff003c;
+            padding: 2rem;
+            margin: 2rem 0;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .oat-container::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: repeating-linear-gradient(
+                45deg,
+                transparent,
+                transparent 10px,
+                rgba(255, 0, 60, 0.1) 10px,
+                rgba(255, 0, 60, 0.1) 20px
+            );
+            animation: oatShift 10s linear infinite;
+            opacity: 0.3;
+        }
+
+        @keyframes oatShift {
+            0% { transform: translate(0, 0) rotate(0deg); }
+            100% { transform: translate(10%, 10%) rotate(45deg); }
+        }
+
+        .oat-label {
+            color: #c77dff;
+            font-size: 1rem;
+            letter-spacing: 3px;
+            margin-bottom: 1rem;
+            position: relative;
+            z-index: 2;
+        }
+
+        .oat-value {
+            font-size: 2.5rem;
+            color: #ff003c;
+            font-family: monospace;
+            word-break: break-all;
+            text-shadow: 
+                0 0 10px #ff003c,
+                0 0 20px #ff003c,
+                0 0 30px #ff003c;
+            animation: oatPulse 2s infinite;
+            position: relative;
+            z-index: 2;
+        }
+
+        @keyframes oatPulse {
+            0%, 100% { 
+                text-shadow: 0 0 10px #ff003c, 0 0 20px #ff003c;
+                transform: scale(1);
+            }
+            50% { 
+                text-shadow: 0 0 20px #ff003c, 0 0 40px #c77dff, 0 0 60px #ff003c;
+                transform: scale(1.02);
+            }
+        }
+
+        /* ===== INFO GRID - HAUNTED ===== */
+        .info-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 1.5rem;
+            margin: 2.5rem 0;
+        }
+
+        .info-item {
+            background: rgba(0, 0, 0, 0.5);
+            padding: 1.2rem;
+            border-left: 3px solid #ff003c;
+            position: relative;
+            overflow: hidden;
+            transition: all 0.3s ease;
+        }
+
+        .info-item:hover {
+            transform: translateX(5px);
+            border-left-color: #c77dff;
+            background: rgba(20, 0, 30, 0.7);
+        }
+
+        .info-item::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255, 0, 60, 0.1), transparent);
+            animation: itemScan 3s infinite;
+            pointer-events: none;
+        }
+
+        @keyframes itemScan {
+            0% { left: -100%; }
+            100% { left: 100%; }
+        }
+
+        .info-label {
+            color: #c77dff;
+            font-size: 0.85rem;
+            letter-spacing: 1.5px;
+            margin-bottom: 0.5rem;
+            position: relative;
+            z-index: 2;
+        }
+
+        .info-value {
+            color: #ff3366;
+            font-size: 1.2rem;
+            font-weight: bold;
+            position: relative;
+            z-index: 2;
+            text-shadow: 0 0 5px rgba(255, 51, 102, 0.5);
+        }
+
+        /* ===== WHISPERING TEXT ===== */
+        .whisper-text {
+            color: #c77dff;
+            line-height: 1.8;
+            margin: 2rem 0;
+            font-size: 1rem;
+            text-align: center;
+            font-style: italic;
+            position: relative;
+            animation: whisper 4s infinite;
+        }
+
+        @keyframes whisper {
+            0%, 100% { opacity: 0.7; letter-spacing: normal; }
+            50% { opacity: 1; letter-spacing: 2px; text-shadow: 0 0 10px #c77dff; }
+        }
+
+        .whisper-text::before,
+        .whisper-text::after {
+            content: '☠';
+            color: #ff003c;
+            margin: 0 1rem;
+            animation: skullSpin 3s infinite;
+            display: inline-block;
+        }
+
+        @keyframes skullSpin {
+            0%, 100% { transform: rotate(0deg); }
+            50% { transform: rotate(180deg); }
+        }
+
+        /* ===== TELEGRAM BUTTON - DEMONIC ===== */
+        .demonic-btn {
+            display: block;
+            width: 100%;
+            padding: 1.5rem;
+            background: linear-gradient(135deg, #990033, #330011);
+            border: 2px solid #ff003c;
+            color: white;
+            text-align: center;
+            text-decoration: none;
+            font-size: 1.2rem;
+            margin: 2rem 0;
+            position: relative;
+            overflow: hidden;
+            transition: all 0.3s;
+            letter-spacing: 3px;
+            text-transform: uppercase;
+        }
+
+        .demonic-btn:hover {
+            background: linear-gradient(135deg, #cc0044, #660022);
+            box-shadow: 0 0 40px #ff003c;
+            transform: scale(1.02);
+        }
+
+        .demonic-btn::before {
+            content: '';
+            position: absolute;
+            top: -2px;
+            left: -2px;
+            right: -2px;
+            bottom: -2px;
+            background: linear-gradient(45deg, #ff003c, #c77dff, #ff003c, #c77dff);
+            background-size: 400% 400%;
+            z-index: -1;
+            animation: borderGlow 3s ease infinite;
+        }
+
+        @keyframes borderGlow {
+            0%, 100% { opacity: 0.5; }
+            50% { opacity: 1; }
+        }
+
+        .demonic-btn::after {
+            content: '𓃼';
+            position: absolute;
+            right: 2rem;
+            top: 50%;
+            transform: translateY(-50%);
+            font-size: 1.5rem;
+            color: rgba(255, 255, 255, 0.5);
+        }
+
+        /* ===== RETURN BUTTON ===== */
         .return-btn {
             display: inline-block;
-            margin-top: 1.5rem;
-            padding: 0.8rem 2rem;
-            background: linear-gradient(45deg, #990033, #660022);
-            border: 1px solid #ff003c;
-            color: #fff;
+            padding: 1rem 3rem;
+            background: transparent;
+            border: 2px solid #c77dff;
+            color: #c77dff;
             text-decoration: none;
             font-size: 1rem;
             letter-spacing: 2px;
-            transition: all 0.3s ease;
+            transition: all 0.3s;
+            position: relative;
+            overflow: hidden;
         }
-        
+
         .return-btn:hover {
-            background: linear-gradient(45deg, #cc0044, #880033);
-            box-shadow: 0 0 15px rgba(255, 0, 60, 0.5);
-            transform: translateY(-2px);
+            background: rgba(199, 125, 255, 0.1);
+            border-color: #ff003c;
+            color: #ff003c;
+            box-shadow: 0 0 20px rgba(255, 0, 60, 0.3);
+        }
+
+        .return-btn::before {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            width: 0;
+            height: 0;
+            background: rgba(255, 0, 60, 0.2);
+            border-radius: 50%;
+            transform: translate(-50%, -50%);
+            transition: width 0.6s, height 0.6s;
+        }
+
+        .return-btn:hover::before {
+            width: 300px;
+            height: 300px;
+        }
+
+        /* ===== WARNING FOOTER ===== */
+        .warning-footer {
+            margin-top: 2rem;
+            padding: 1rem;
+            border-top: 1px solid #330033;
+            color: #555;
+            font-size: 0.85rem;
+            text-align: center;
+            position: relative;
+        }
+
+        .warning-footer span {
+            animation: flicker 3s infinite;
+            display: inline-block;
+        }
+
+        @keyframes flicker {
+            0%, 100% { opacity: 1; }
+            92% { opacity: 1; }
+            93% { opacity: 0.3; }
+            94% { opacity: 1; }
+            95% { opacity: 0.3; }
+            96% { opacity: 1; }
+        }
+
+        /* ===== HORROR QUOTES ===== */
+        .horror-quote {
+            text-align: center;
+            margin: 1.5rem 0;
+            color: #888;
+            font-size: 0.9rem;
+            font-style: italic;
+            animation: quoteAppear 5s infinite;
+        }
+
+        @keyframes quoteAppear {
+            0%, 100% { opacity: 0.5; }
+            50% { opacity: 1; color: #c77dff; }
+        }
+
+        /* ===== LOADING OVERLAY FOR INITIAL LOAD ===== */
+        .initial-load {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: #000;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            z-index: 9999;
+            animation: fadeOut 3s forwards;
+            pointer-events: none;
+        }
+
+        @keyframes fadeOut {
+            0% { opacity: 1; }
+            70% { opacity: 1; }
+            100% { opacity: 0; display: none; }
+        }
+
+        .load-text {
+            color: #ff003c;
+            font-size: 2rem;
+            letter-spacing: 5px;
+            animation: loadPulse 1s infinite;
+        }
+
+        @keyframes loadPulse {
+            0%, 100% { opacity: 1; text-shadow: 0 0 20px #ff003c; }
+            50% { opacity: 0.5; text-shadow: 0 0 40px #ff003c; }
+        }
+
+        /* ===== RESPONSIVE ===== */
+        @media (max-width: 768px) {
+            .success-container {
+                margin: 2vh auto;
+                padding: 1rem;
+            }
+            
+            .horror-card {
+                padding: 1.5rem;
+            }
+            
+            .glitch-title {
+                font-size: 1.8rem;
+            }
+            
+            .oat-value {
+                font-size: 1.8rem;
+            }
+            
+            .info-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .seal-glow {
+                font-size: 3rem;
+            }
+        }
+
+        /* ===== CURSOR TRAIL EFFECT ===== */
+        .cursor-trail {
+            position: fixed;
+            width: 20px;
+            height: 20px;
+            border-radius: 50%;
+            background: rgba(255, 0, 60, 0.3);
+            pointer-events: none;
+            z-index: 9998;
+            filter: blur(5px);
+            transition: all 0.1s;
+        }
+
+        /* ===== BLOOD SPLATTER ANIMATION ===== */
+        @keyframes bloodSplatter {
+            0% {
+                transform: scale(0);
+                opacity: 1;
+            }
+            100% {
+                transform: scale(2);
+                opacity: 0;
+            }
         }
     </style>
 </head>
 <body>
-    <!-- Background particles -->
-    <div class="bg-effects" id="particles"></div>
+    <!-- INITIAL LOADING -->
+    <div class="initial-load">
+        <div class="load-text">THE VEIL OPENS...</div>
+    </div>
+
+    <!-- TERRIFYING BACKGROUND -->
+    <div class="horror-bg">
+        <div class="bg-image"></div>
+        <div class="blood-overlay"></div>
+        <div class="veil-pulse" id="veilPulse"></div>
+        <div class="blood-drip"></div>
+    </div>
+
+    <!-- FLOATING HORROR ELEMENTS -->
+    <div class="floating-skull" style="left: 10%; animation-delay: 0s;">💀</div>
+    <div class="floating-skull" style="left: 30%; animation-delay: 5s;">👻</div>
+    <div class="floating-skull" style="left: 50%; animation-delay: 2s;">💀</div>
+    <div class="floating-skull" style="left: 70%; animation-delay: 7s;">👁️</div>
+    <div class="floating-skull" style="left: 90%; animation-delay: 3s;">👤</div>
     
-    <!-- Success content -->
+    <div class="floating-ghost" style="left: 20%; animation-delay: 1s;">👹</div>
+    <div class="floating-ghost" style="left: 40%; animation-delay: 4s;">👺</div>
+    <div class="floating-ghost" style="left: 60%; animation-delay: 6s;">👿</div>
+    <div class="floating-ghost" style="left: 80%; animation-delay: 2s;">💀</div>
+
+    <!-- MAIN CONTENT -->
     <div class="success-container">
-        <h1 class="success-title">☬ The Shadows have acknowledged you, Initiate. ☬</h1>
-        
-        <div class="success-message">
-            <p class="instructions">
-                Your name now resonates through the void:<br>
-                <span class="oat-display" id="user-name">Unknown Initiate</span>
-            </p>
-            
-            <p class="instructions">
-                Your OAT has been recorded as a mark of your allegiance:<br>
-                <span class="oat-display" id="user-oat">Unknown᭄ˢʰᵃᵈᵒʷ</span>
-            </p>
-            
-            <p class="instructions">
-                Your Shadow Moniker:<br>
-                <span class="moniker-display" id="user-moniker">᭄ˢʰᵃᵈᵒʷ______</span>
-            </p>
-            
-            <div class="seal">☬≛⃝͙☬</div>
-            
-            <p class="instructions">
-                The Veil watches silently.<br>
-                Await the judgment of the Elders.
-            </p>
-            
-            <p class="instructions">
-                Check your email — or the forgotten corners of your spam folder — for your summons.<br>
-                If the message does not arrive, allow the shadows to linger for a short while before seeking it again.
-            </p>
-            
-            <a href="index.html" class="return-btn">RETURN TO THE VEIL</a>
+        <!-- RITUAL SEAL -->
+        <div class="ritual-seal">
+            <div class="seal-glow">𓃼≛⃝͙𓃼</div>
         </div>
-        
-        <h2 class="success-title" style="font-size: 1.8rem; margin-top: 1.5rem;">
-            ☬ Stand vigilant. Let the shadows remember your name. ☬
-        </h2>
-        
-        <div class="warning">
-            ☠ Remember, the Veil observes all. ☠
+
+        <!-- HORROR CARD -->
+        <div class="horror-card">
+            <h1 class="glitch-title" data-text="☠ THE SHADOWS ACCEPT ☠">☠ THE SHADOWS ACCEPT ☠</h1>
+            
+            <!-- OAT DISPLAY -->
+            <div class="oat-container">
+                <div class="oat-label">YOUR OFFICIAL ASSIGNED TAG</div>
+                <div class="oat-value" id="oat-display">𓃼 INITIATE 𓃼</div>
+            </div>
+
+            <!-- USER DATA GRID -->
+            <div class="info-grid" id="user-data">
+                <!-- Data will be loaded here -->
+            </div>
+
+            <!-- WHISPERING TEXT -->
+            <div class="whisper-text">
+                The Veil has recorded your soul in the Silent Ledger
+            </div>
+
+            <!-- HORROR QUOTES -->
+            <div class="horror-quote" id="random-quote"></div>
+
+            <!-- TELEGRAM BUTTON -->
+            <a href="https://t.me/YOUR_BOT_USERNAME" class="demonic-btn" target="_blank">
+                𓃼 JOIN THE SHADOWS ON TELEGRAM 𓃼
+            </a>
+
+            <!-- RETURN BUTTON -->
+            <div style="text-align: center;">
+                <a href="index.html" class="return-btn">⟲ RETURN TO THE VEIL</a>
+            </div>
+
+            <!-- WARNING FOOTER -->
+            <div class="warning-footer">
+                <span>☠</span> THE SILENT LEDGER NEVER FORGETS <span>☠</span><br>
+                <span style="font-size: 0.7rem;">Every action echoes in eternity</span>
+            </div>
         </div>
     </div>
 
     <script>
-        // Generate particles
-        function createParticles() {
-            const container = document.getElementById('particles');
-            for (let i = 0; i < 40; i++) {
-                const particle = document.createElement('div');
-                particle.className = 'particle';
-                particle.style.left = `${Math.random() * 100}%`;
-                particle.style.animationDelay = `${Math.random() * 5}s`;
-                particle.style.animationDuration = `${3 + Math.random() * 4}s`;
-                container.appendChild(particle);
-            }
-        }
+        // ============================================
+        // HORROR EFFECTS
+        // ============================================
         
-        // Get user data from localStorage
+        // Mouse trail effect
+        document.addEventListener('mousemove', (e) => {
+            const trail = document.createElement('div');
+            trail.className = 'cursor-trail';
+            trail.style.left = e.pageX - 10 + 'px';
+            trail.style.top = e.pageY - 10 + 'px';
+            document.body.appendChild(trail);
+            
+            setTimeout(() => {
+                trail.remove();
+            }, 500);
+        });
+
+        // Veil pulse follows mouse
+        const veilPulse = document.getElementById('veilPulse');
+        document.addEventListener('mousemove', (e) => {
+            const x = (e.clientX / window.innerWidth) * 100;
+            const y = (e.clientY / window.innerHeight) * 100;
+            veilPulse.style.setProperty('--x', x + '%');
+            veilPulse.style.setProperty('--y', y + '%');
+        });
+
+        // Random horror quotes
+        const quotes = [
+            "The shadows are watching you...",
+            "Your soul is now bound to the Veil",
+            "Every keystroke echoes in the void",
+            "The Elders have been summoned",
+            "Your OAT is your curse now",
+            "There is no escape from the shadows",
+            "The Silent Ledger records all",
+            "You belong to the darkness now",
+            "The Veil has claimed another soul",
+            "Your digital footprint is eternal",
+            "The Codex demands your loyalty",
+            "Initiation is just the beginning",
+            "The shadows remember your name",
+            "You can never leave the Veil",
+            "Your actions are now monitored"
+        ];
+
+        function changeQuote() {
+            const quoteElement = document.getElementById('random-quote');
+            const randomIndex = Math.floor(Math.random() * quotes.length);
+            quoteElement.textContent = '☬ "' + quotes[randomIndex] + '" ☬';
+        }
+
+        changeQuote();
+        setInterval(changeQuote, 5000);
+
+        // ============================================
+        // LOAD USER DATA
+        // ============================================
         function loadUserData() {
             try {
-                const data = JSON.parse(localStorage.getItem('last_initiate'));
-                if (data) {
-                    document.getElementById('user-name').textContent = data.name;
-                    document.getElementById('user-oat').textContent = data.oat;
-                    document.getElementById('user-moniker').textContent = data.moniker || '᭄ˢʰᵃᵈᵒʷUnknown';
+                const data = JSON.parse(localStorage.getItem('shadow_initiate_data') || '{}');
+                const container = document.getElementById('user-data');
+                const oatDisplay = document.getElementById('oat-display');
+                
+                if (data.name) {
+                    // Update OAT display
+                    oatDisplay.textContent = data.oat || data.name + '𓃼';
+                    
+                    // Create grid items
+                    const items = [
+                        { label: 'SHADOW NAME', value: data.name },
+                        { label: 'SHADOW MONIKER', value: data.moniker || '𓃼' + data.name },
+                        { label: 'GENDER ESSENCE', value: data.gender || 'Unknown' },
+                        { label: 'TELEGRAM', value: data.telegram || '@unknown' },
+                        { label: 'ARCHETYPE', value: data.role || 'Initiate' },
+                        { label: 'AGE CYCLE', value: data.age || 'Unknown' },
+                        { label: 'CONTACT FREQUENCY', value: data.phone || 'Unknown' },
+                        { label: 'DIGITAL ECHO', value: data.email || 'Unknown' }
+                    ];
+                    
+                    container.innerHTML = '';
+                    items.forEach(item => {
+                        const div = document.createElement('div');
+                        div.className = 'info-item';
+                        div.innerHTML = `
+                            <div class="info-label">${item.label}</div>
+                            <div class="info-value">${item.value}</div>
+                        `;
+                        container.appendChild(div);
+                    });
+                    
+                    // Add timestamp
+                    if (data.timestamp) {
+                        const timeDiv = document.createElement('div');
+                        timeDiv.style.gridColumn = 'span 2';
+                        timeDiv.style.textAlign = 'center';
+                        timeDiv.style.color = '#888';
+                        timeDiv.style.marginTop = '1rem';
+                        timeDiv.style.fontSize = '0.8rem';
+                        timeDiv.innerHTML = `⚔ Initiated: ${data.timestamp} ⚔`;
+                        container.appendChild(timeDiv);
+                    }
+                } else {
+                    // Demo data for testing
+                    oatDisplay.textContent = 'DEMO𓃼INITIATE';
+                    container.innerHTML = `
+                        <div class="info-item">
+                            <div class="info-label">SHADOW NAME</div>
+                            <div class="info-value">Shadow Initiate</div>
+                        </div>
+                        <div class="info-item">
+                            <div class="info-label">SHADOW MONIKER</div>
+                            <div class="info-value">𓃼Demon</div>
+                        </div>
+                        <div class="info-item">
+                            <div class="info-label">GENDER ESSENCE</div>
+                            <div class="info-value">Unknown</div>
+                        </div>
+                        <div class="info-item">
+                            <div class="info-label">TELEGRAM</div>
+                            <div class="info-value">@shadow</div>
+                        </div>
+                        <div class="info-item">
+                            <div class="info-label">ARCHETYPE</div>
+                            <div class="info-value">Strategist</div>
+                        </div>
+                        <div class="info-item">
+                            <div class="info-label">AGE CYCLE</div>
+                            <div class="info-value">25</div>
+                        </div>
+                    `;
                 }
             } catch (e) {
-                console.error('Error loading user data:', e);
+                console.error('Error loading data:', e);
             }
         }
+
+        // ============================================
+        // SCARY SOUND EFFECT (Optional - uncomment if you want sound)
+        // ============================================
+        /*
+        function playScarySound() {
+            const audio = new Audio();
+            audio.src = 'data:audio/wav;base64,UklGRlwAAABXQVZFZm10IBAAAAABAAEAQB8AAEAfAAABAAgAZGF0YVQAAACAgICAf39/f39/f3+AgICAf39/f39/f3+AgICAf39/f39/f3+AgICAf39/f39/f3+AgICAf39/f39/f3+AgICAf39/fw==';
+            audio.volume = 0.3;
+            audio.play().catch(() => {});
+        }
         
-        // Initialize
-        createParticles();
-        loadUserData();
+        // Play sound on load
+        window.addEventListener('load', () => {
+            setTimeout(playScarySound, 1000);
+        });
+        */
+
+        // ============================================
+        // INITIALIZE
+        // ============================================
+        window.addEventListener('load', () => {
+            loadUserData();
+            
+            // Random blood splatter effect
+            setInterval(() => {
+                if (Math.random() > 0.7) { // 30% chance every 10 seconds
+                    const splatter = document.createElement('div');
+                    splatter.style.position = 'fixed';
+                    splatter.style.top = Math.random() * 100 + '%';
+                    splatter.style.left = Math.random() * 100 + '%';
+                    splatter.style.width = '100px';
+                    splatter.style.height = '100px';
+                    splatter.style.background = 'radial-gradient(circle, rgba(255,0,60,0.2) 0%, transparent 70%)';
+                    splatter.style.borderRadius = '50%';
+                    splatter.style.pointerEvents = 'none';
+                    splatter.style.zIndex = '9997';
+                    splatter.style.animation = 'bloodSplatter 2s forwards';
+                    document.body.appendChild(splatter);
+                    
+                    setTimeout(() => {
+                        splatter.remove();
+                    }, 2000);
+                }
+            }, 10000);
+        });
+
+        // Prevent back navigation
+        history.pushState(null, null, location.href);
+        window.addEventListener('popstate', function () {
+            history.pushState(null, null, location.href);
+        });
     </script>
 </body>
 </html>
