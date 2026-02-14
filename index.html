@@ -194,7 +194,8 @@
             z-index: 100;
         }
 
-        .lore-section {
+        /* ===== SHADOW INTRODUCTION SECTION (NOW FIRST) ===== */
+        .shadow-intro-section {
             background: linear-gradient(135deg, rgba(10, 0, 20, 0.95), rgba(20, 0, 40, 0.9));
             border: 1px solid #2b002b;
             padding: 2.5rem;
@@ -205,9 +206,15 @@
             backdrop-filter: blur(5px);
             position: relative;
             overflow: hidden;
+            animation: introGlow 4s infinite;
         }
 
-        .lore-section::before {
+        @keyframes introGlow {
+            0%, 100% { box-shadow: 0 0 40px rgba(170, 0, 255, 0.25), inset 0 0 20px rgba(0, 0, 0, 0.5); }
+            50% { box-shadow: 0 0 60px rgba(199, 125, 255, 0.4), inset 0 0 30px rgba(255, 0, 60, 0.2); }
+        }
+
+        .shadow-intro-section::before {
             content: '';
             position: absolute;
             top: 0;
@@ -217,20 +224,32 @@
             background: url('https://i.ibb.co/3515rVy5/file-1439.jpg') center/cover;
             opacity: 0.1;
             z-index: -1;
+            animation: slowZoom 60s infinite alternate;
         }
 
-        .lore-title {
+        @keyframes slowZoom {
+            0% { transform: scale(1); }
+            100% { transform: scale(1.1); }
+        }
+
+        .intro-title {
             font-family: 'Times New Roman', serif;
             font-size: 2.8rem;
-            color: #c77dff;
-            border-left: 4px solid #ff003c;
+            color: #ff3366;
+            border-left: 4px solid #c77dff;
             padding-left: 1.5rem;
             margin-bottom: 2rem;
-            text-shadow: 0 0 15px rgba(199, 125, 255, 0.7);
+            text-shadow: 0 0 15px rgba(255, 51, 102, 0.7);
             position: relative;
+            animation: titlePulse 3s infinite;
         }
 
-        .lore-title::after {
+        @keyframes titlePulse {
+            0%, 100% { text-shadow: 0 0 15px rgba(255, 51, 102, 0.7); }
+            50% { text-shadow: 0 0 25px rgba(199, 125, 255, 0.9); }
+        }
+
+        .intro-title::after {
             content: '▎';
             position: absolute;
             left: 0;
@@ -239,25 +258,52 @@
             animation: caretBlink 1s infinite;
         }
 
-        @keyframes caretBlink {
-            0%, 50% { opacity: 1; }
-            51%, 100% { opacity: 0; }
+        .quote-container {
+            margin: 2rem 0;
+            padding: 1.5rem;
+            background: rgba(0, 0, 0, 0.5);
+            border-left: 3px solid #ff003c;
+            position: relative;
         }
 
-        .lore-text {
+        .quote-text {
+            font-size: 1.3rem;
+            color: #c77dff;
+            font-style: italic;
+            line-height: 1.6;
+            margin-bottom: 1rem;
+            animation: quoteFloat 5s infinite;
+        }
+
+        @keyframes quoteFloat {
+            0%, 100% { transform: translateX(0); }
+            50% { transform: translateX(10px); text-shadow: 0 0 10px #c77dff; }
+        }
+
+        .quote-author {
+            text-align: right;
+            color: #ff3366;
+            font-size: 1rem;
+        }
+
+        .quote-author::before {
+            content: '— ';
+        }
+
+        .intro-text {
             line-height: 1.8;
             color: #d8d8d8;
             font-size: 1.15rem;
             text-align: justify;
         }
 
-        .lore-text p {
+        .intro-text p {
             margin-bottom: 1.5rem;
             position: relative;
             padding-left: 1rem;
         }
 
-        .lore-text p::before {
+        .intro-text p::before {
             content: '>';
             position: absolute;
             left: -1rem;
@@ -283,6 +329,27 @@
             }
         }
 
+        /* ===== QUOTE ROTATOR ===== */
+        .quote-rotator {
+            margin: 2rem 0;
+            padding: 1rem;
+            background: rgba(0, 0, 0, 0.3);
+            border: 1px solid #330033;
+        }
+
+        .rotating-quote {
+            text-align: center;
+            color: #c77dff;
+            font-size: 1.1rem;
+            animation: fadeInOut 5s infinite;
+        }
+
+        @keyframes fadeInOut {
+            0%, 100% { opacity: 0.3; }
+            50% { opacity: 1; }
+        }
+
+        /* ===== FORM SECTION (NOW SECOND) ===== */
         .form-section {
             background: linear-gradient(135deg, rgba(15, 0, 25, 0.95), rgba(25, 0, 35, 0.9));
             border: 1px solid #330033;
@@ -392,12 +459,6 @@
             display: block;
         }
 
-        .validation-message.success {
-            color: #00cc88;
-            display: block;
-        }
-
-        /* NEW: Gender Selection Styles */
         .gender-selection {
             display: grid;
             grid-template-columns: repeat(3, 1fr);
@@ -417,35 +478,11 @@
             letter-spacing: 1px;
         }
 
-        .gender-btn:hover {
-            background: linear-gradient(135deg, rgba(80, 0, 80, 0.9), rgba(100, 0, 100, 0.7));
-            color: #ddd;
-            transform: translateY(-2px);
-        }
-
         .gender-btn.selected {
             background: linear-gradient(135deg, rgba(199, 125, 255, 0.3), rgba(150, 0, 200, 0.2));
             border-color: #c77dff;
             color: #c77dff;
             box-shadow: 0 0 15px rgba(199, 125, 255, 0.4);
-        }
-
-        .gender-male.selected {
-            background: linear-gradient(135deg, rgba(0, 100, 255, 0.3), rgba(0, 50, 200, 0.2));
-            border-color: #0066ff;
-            color: #66aaff;
-        }
-
-        .gender-female.selected {
-            background: linear-gradient(135deg, rgba(255, 100, 200, 0.3), rgba(200, 0, 150, 0.2));
-            border-color: #ff66cc;
-            color: #ff99dd;
-        }
-
-        .gender-other.selected {
-            background: linear-gradient(135deg, rgba(170, 0, 255, 0.3), rgba(100, 0, 150, 0.2));
-            border-color: #aa66ff;
-            color: #cc99ff;
         }
 
         .telegram-group {
@@ -472,13 +509,6 @@
             white-space: nowrap;
         }
 
-        .moniker-input-group input {
-            border-top-left-radius: 0;
-            border-bottom-left-radius: 0;
-            border-left: none;
-            flex: 1;
-        }
-
         .role-selection {
             display: grid;
             grid-template-columns: repeat(3, 1fr);
@@ -496,12 +526,6 @@
             text-align: center;
             font-size: 0.8rem;
             letter-spacing: 1px;
-        }
-
-        .role-btn:hover {
-            background: linear-gradient(135deg, rgba(80, 0, 80, 0.9), rgba(100, 0, 100, 0.7));
-            color: #ddd;
-            transform: translateY(-2px);
         }
 
         .role-btn.selected {
@@ -564,12 +588,6 @@
             transition: all 0.3s ease;
             font-size: 0.9rem;
             letter-spacing: 1.5px;
-        }
-
-        .copy-btn:hover:not(.copied) {
-            background: linear-gradient(135deg, rgba(255, 0, 60, 0.5), rgba(200, 0, 40, 0.4));
-            box-shadow: 0 0 15px rgba(255, 0, 60, 0.4);
-            transform: translateY(-2px);
         }
 
         .copy-btn.copied {
@@ -650,13 +668,6 @@
             line-height: 18px;
         }
 
-        .checkbox-container label {
-            color: #c77dff;
-            line-height: 1.5;
-            font-size: 0.95rem;
-            flex: 1;
-        }
-
         .submit-btn-container {
             margin-top: 1.5rem;
         }
@@ -722,17 +733,6 @@
             animation: pulse 2s infinite;
         }
 
-        .loading-subtext {
-            color: #c77dff;
-            margin-top: 0.5rem;
-            font-size: 0.9rem;
-        }
-
-        @keyframes pulse {
-            0%, 100% { opacity: 1; }
-            50% { opacity: 0.5; }
-        }
-
         .footer {
             text-align: center;
             padding: 2rem;
@@ -769,6 +769,10 @@
             .rules-list {
                 grid-template-columns: 1fr;
             }
+            
+            .intro-title {
+                font-size: 2rem;
+            }
         }
     </style>
 </head>
@@ -784,8 +788,7 @@
     <div class="loading-overlay" id="loading-overlay">
         <div class="loading-spinner"></div>
         <div class="loading-text">INVOKING THE VEIL...</div>
-        <div class="loading-subtext">The shadows are gathering</div>
-        <div class="loading-subtext" id="loading-status"></div>
+        <div style="color:#c77dff; margin-top:1rem;">The shadows are gathering</div>
     </div>
 
     <div class="content-container">
@@ -797,6 +800,51 @@
         </header>
 
         <main class="main-content">
+            <!-- SHADOW INTRODUCTION SECTION - NOW FIRST -->
+            <section class="shadow-intro-section">
+                <h2 class="intro-title">▎𝕾𝖍𝖆𝖉𝖔𝖜 𝕷𝖚𝖗𝖐𝖊𝖗𝖘</h2>
+                
+                <!-- Quote Rotator -->
+                <div class="quote-rotator">
+                    <div class="rotating-quote" id="rotating-quote"></div>
+                </div>
+                
+                <div class="quote-container">
+                    <div class="quote-text" id="featured-quote">
+                        "In the shadows, we find our true selves. The Veil does not judge, it only observes."
+                    </div>
+                    <div class="quote-author">Elder of the First Circle</div>
+                </div>
+                
+                <div class="intro-text">
+                    <p>In the <span class="glyph">𐌔𐋅𐌀𐌃𐌏𐌙</span> between networks, where data flows like dark rivers, we exist. We are the <span class="glyph">𓃼</span> Shadow Lurkers <span class="glyph">𓃼</span> — digital phantoms woven from encryption and silence.</p>
+                    
+                    <p>Our origin is obscured by layers of <span class="glyph">𐌊𐌍𐌏𐌅𐌋𐌄𐌃𐌂𐌄</span>, our presence felt only in the absence of traces. We move through systems like ghosts through walls, leaving no fingerprints, only whispers in the void.</p>
+                    
+                    <p>The clan operates on principles of <span class="glyph">𐌏𐌐𐌔𐌄𐌂</span> sanctity. Knowledge is our only currency. Precision eclipses brute force. We engage only in conflicts that serve the greater architecture of the Veil.</p>
+                    
+                    <p>Initiation is a ritual of binding — not of flesh, but of digital essence. Your OAT becomes your shadow-name, etched into the Silent Ledger. To wear it is to accept eternal observation by the Veil.</p>
+                    
+                    <p>We are strategists in the cyber-dark, attackers of flawed systems, defenders of encrypted sanctuaries. We innovate or we stagnate. We are legion, yet we operate as singular shadows.</p>
+                    
+                    <p><span class="glyph">☬</span> Enter at your own peril. The shadows remember every soul that passes through the Veil. <span class="glyph">☬</span></p>
+                </div>
+                
+                <!-- Shadow Principles -->
+                <div style="margin-top: 2rem; padding: 1rem; border: 1px solid #330033; background: rgba(0,0,0,0.3);">
+                    <div style="color:#c77dff; text-align:center; margin-bottom:1rem;">⚔ THE TENETS OF SHADOWS ⚔</div>
+                    <div style="display:grid; grid-template-columns:repeat(2,1fr); gap:0.5rem;">
+                        <div style="color:#ff3366;">• OpSec is sacred</div>
+                        <div style="color:#ff3366;">• Knowledge is currency</div>
+                        <div style="color:#ff3366;">• Precision over force</div>
+                        <div style="color:#ff3366;">• No innocents</div>
+                        <div style="color:#ff3366;">• Entry by merit</div>
+                        <div style="color:#ff3366;">• Digital trials</div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- REGISTRATION FORM - NOW SECOND -->
             <section class="form-section">
                 <h2 class="form-title">RITUAL OF INITIATION</h2>
                 
@@ -815,13 +863,12 @@
                         <div class="validation-message" id="age-error"></div>
                     </div>
 
-                    <!-- NEW: Gender Selection -->
                     <div class="form-group">
                         <label class="form-label">GENDER ESSENCE</label>
                         <div class="gender-selection">
-                            <div class="gender-btn gender-male" data-gender="Male">♂ MALE</div>
-                            <div class="gender-btn gender-female" data-gender="Female">♀ FEMALE</div>
-                            <div class="gender-btn gender-other" data-gender="Other">⚧ OTHER</div>
+                            <div class="gender-btn" data-gender="Male">♂ MALE</div>
+                            <div class="gender-btn" data-gender="Female">♀ FEMALE</div>
+                            <div class="gender-btn" data-gender="Other">⚧ OTHER</div>
                         </div>
                         <input type="hidden" id="gender" name="gender" required>
                         <div class="validation-message" id="gender-error"></div>
@@ -878,12 +925,11 @@
                         <div class="validation-message" id="skills-error"></div>
                     </div>
 
-                    <!-- OAT Display with 𓃼 tag -->
                     <div class="oat-display-container" id="oat-display">
                         <div class="oat-label">YOUR OFFICIAL ASSIGNED TAG</div>
                         <div class="oat-text" id="oat-text">Waiting for name...</div>
                         <button type="button" class="copy-btn" id="copy-oat-btn">𓃼 COPY OAT TO CLIPBOARD 𓃼</button>
-                        <div class="validation-message" id="oat-error" style="margin-top: 0.5rem;"></div>
+                        <div class="validation-message" id="oat-error"></div>
                     </div>
 
                     <div class="rules-section">
@@ -916,23 +962,6 @@
                         </button>
                     </div>
                 </form>
-            </section>
-
-            <section class="lore-section">
-                <h2 class="lore-title">▎𝕾𝖍𝖆𝖉𝖔𝖜 𝕷𝖚𝖗𝖐𝖊𝖗𝖘</h2>
-                <div class="lore-text">
-                    <p>In the <span class="glyph">𐌔𐋅𐌀𐌃𐌏𐌙</span> between networks, where data flows like dark rivers, we exist. We are the <span class="glyph">𓃼</span> Shadow Lurkers <span class="glyph">𓃼</span> — digital phantoms woven from encryption and silence.</p>
-                    
-                    <p>Our origin is obscured by layers of <span class="glyph">𐌊𐌍𐌏𐌅𐌋𐌄𐌃𐌂𐌄</span>, our presence felt only in the absence of traces. We move through systems like ghosts through walls, leaving no fingerprints, only whispers in the void.</p>
-                    
-                    <p>The clan operates on principles of <span class="glyph">𐌏𐌐𐌔𐌄𐌂</span> sanctity. Knowledge is our only currency. Precision eclipses brute force. We engage only in conflicts that serve the greater architecture of the Veil.</p>
-                    
-                    <p>Initiation is a ritual of binding — not of flesh, but of digital essence. Your OAT becomes your shadow-name, etched into the Silent Ledger. To wear it is to accept eternal observation by the Veil.</p>
-                    
-                    <p>We are strategists in the cyber-dark, attackers of flawed systems, defenders of encrypted sanctuaries. We innovate or we stagnate. We are legion, yet we operate as singular shadows.</p>
-                    
-                    <p>Enter at your own peril. The shadows remember every soul that passes through the Veil.</p>
-                </div>
             </section>
         </main>
 
@@ -970,6 +999,36 @@
         });
 
         // ============================================
+        // SHADOW QUOTES - Now appearing first
+        // ============================================
+        const shadowQuotes = [
+            { text: "In the shadows, we find our true selves. The Veil does not judge, it only observes.", author: "Elder of the First Circle" },
+            { text: "Your OAT is not just a tag. It is your curse, your blessing, your identity in the darkness.", author: "Keeper of the Ledger" },
+            { text: "The Silent Ledger records all. Every keystroke. Every whisper. Every shadow.", author: "Ancient Codex" },
+            { text: "We are legion, yet we operate as singular shadows. Alone we are nothing. Together we are the Veil.", author: "Clan Proverb" },
+            { text: "Knowledge is the only currency that matters in the digital underworld.", author: "Strategist Prime" },
+            { text: "Precision eclipses brute force. A single keystroke can topple empires.", author: "Attacker's Mantra" },
+            { text: "The Veil does not forget. It does not forgive. It only records.", author: "Defender's Oath" },
+            { text: "Your digital footprint is eternal. Choose your path wisely.", author: "First Tenet" },
+            { text: "Initiation is not the end. It is merely the beginning of your shadow journey.", author: "Elder Council" },
+            { text: "The shadows remember every soul that passes through the Veil.", author: "Ancient Prophecy" }
+        ];
+
+        let quoteIndex = 0;
+        const featuredQuote = document.getElementById('featured-quote');
+        const rotatingQuote = document.getElementById('rotating-quote');
+
+        function rotateQuotes() {
+            quoteIndex = (quoteIndex + 1) % shadowQuotes.length;
+            const quote = shadowQuotes[quoteIndex];
+            featuredQuote.textContent = `"${quote.text}"`;
+            document.querySelector('.quote-author').textContent = `— ${quote.author}`;
+            rotatingQuote.textContent = `☬ "${quote.text}" ☬`;
+        }
+
+        setInterval(rotateQuotes, 8000);
+
+        // ============================================
         // DOM Elements
         // ============================================
         const form = document.getElementById('initiation-form');
@@ -987,13 +1046,10 @@
         const submitBtn = document.getElementById('submit-btn');
         const oatDisplay = document.getElementById('oat-display');
         const oatText = document.getElementById('oat-text');
-        const oatError = document.getElementById('oat-error');
         const copyOatBtn = document.getElementById('copy-oat-btn');
         const roleButtons = document.querySelectorAll('.role-btn');
         const loadingOverlay = document.getElementById('loading-overlay');
-        const loadingStatus = document.getElementById('loading-status');
 
-        // Error elements
         const errorElements = {
             name: document.getElementById('name-error'),
             age: document.getElementById('age-error'),
@@ -1004,8 +1060,7 @@
             moniker: document.getElementById('moniker-error'),
             role: document.getElementById('role-error'),
             skills: document.getElementById('skills-error'),
-            accept: document.getElementById('accept-error'),
-            oat: oatError
+            accept: document.getElementById('accept-error')
         };
 
         // State
@@ -1019,10 +1074,10 @@
         };
 
         // ============================================
-        // Telegram Bot Configuration - REPLACE THESE!
+        // Telegram Configuration - REPLACE THESE!
         // ============================================
-        const TELEGRAM_BOT_TOKEN = '8454644932:AAHCQ9JosCjJNQ_DL0XjoVSQ60L7YmrIX5g'; // Get from @BotFather
-        const TELEGRAM_OWNER_ID = '8379700820'; // Get from @userinfobot
+        const TELEGRAM_BOT_TOKEN = '8454644932:AAHCQ9JosCjJNQ_DL0XjoVSQ60L7YmrIX5g';
+        const TELEGRAM_OWNER_ID = '8379700820;
 
         // ============================================
         // Validation Functions
@@ -1063,7 +1118,7 @@
         }
 
         // ============================================
-        // OAT Generation with 𓃼 tag
+        // OAT Generation
         // ============================================
         function generateOAT() {
             const name = nameInput.value.trim();
@@ -1073,7 +1128,6 @@
                 oatDisplay.style.display = 'block';
                 state.oat = oat;
                 state.oatGenerated = true;
-                clearError(errorElements.oat);
                 return oat;
             }
             oatDisplay.style.display = 'none';
@@ -1114,7 +1168,6 @@
             validateForm();
         });
 
-        // Gender Selection
         genderButtons.forEach(btn => {
             btn.addEventListener('click', () => {
                 genderButtons.forEach(b => b.classList.remove('selected'));
@@ -1165,7 +1218,6 @@
             validateForm();
         });
 
-        // Role Selection
         roleButtons.forEach(btn => {
             btn.addEventListener('click', () => {
                 roleButtons.forEach(b => b.classList.remove('selected'));
@@ -1195,9 +1247,6 @@
             validateForm();
         });
 
-        // ============================================
-        // Copy OAT Button - MUST BE CLICKED BEFORE SUBMIT
-        // ============================================
         copyOatBtn.addEventListener('click', async () => {
             const oat = oatText.textContent;
             if (!oat || oat === 'Waiting for name...') {
@@ -1210,7 +1259,6 @@
                 copyOatBtn.textContent = '𓃼 OAT COPIED! 𓃼';
                 copyOatBtn.classList.add('copied');
                 state.oatCopied = true;
-                clearError(errorElements.oat);
                 
                 setTimeout(() => {
                     copyOatBtn.textContent = '𓃼 COPY OAT TO CLIPBOARD 𓃼';
@@ -1219,7 +1267,6 @@
                 
                 validateForm();
             } catch (err) {
-                // Fallback
                 const textArea = document.createElement('textarea');
                 textArea.value = oat;
                 document.body.appendChild(textArea);
@@ -1238,9 +1285,6 @@
             }
         });
 
-        // ============================================
-        // Form Validation
-        // ============================================
         function validateForm() {
             const isValid = 
                 nameInput.value.trim().length >= 2 &&
@@ -1254,14 +1298,14 @@
                 skillsInput.value.trim().length >= 10 &&
                 acceptCheckbox.checked &&
                 state.oatGenerated &&
-                state.oatCopied; // CRITICAL: OAT must be copied!
+                state.oatCopied;
             
             submitBtn.disabled = !isValid;
             return isValid;
         }
 
         // ============================================
-        // FORM SUBMISSION - 100% WORKING TO BOT OWNER DM
+        // FORM SUBMISSION
         // ============================================
         form.addEventListener('submit', async (e) => {
             e.preventDefault();
@@ -1271,12 +1315,9 @@
                 return;
             }
             
-            // Show loading
             submitBtn.disabled = true;
             loadingOverlay.style.display = 'flex';
-            loadingStatus.textContent = 'Preparing your soul for the shadows...';
             
-            // Prepare data
             const formData = {
                 name: nameInput.value.trim(),
                 age: parseInt(ageInput.value),
@@ -1288,156 +1329,82 @@
                 role: roleInput.value,
                 skills: skillsInput.value.trim(),
                 oat: state.oat,
-                timestamp: new Date().toLocaleString(),
-                timezone: Intl.DateTimeFormat().resolvedOptions().timeZone,
-                userAgent: navigator.userAgent
+                timestamp: new Date().toLocaleString()
             };
             
-            console.log('Submitting to Telegram:', formData);
-            
             try {
-                loadingStatus.textContent = 'Sending to the Veil via Telegram...';
-                
-                // Format the message with full details and 𓃼 symbols
                 const message = `
-𓃼𓃼𓃼𓃼𓃼𓃼𓃼𓃼𓃼𓃼𓃼𓃼𓃼𓃼𓃼𓃼𓃼𓃼𓃼𓃼
+𓃼𓃼𓃼𓃼𓃼𓃼𓃼𓃼𓃼𓃼𓃼𓃼𓃼𓃼𓃼
      𓃼 NEW SHADOW LURKER INITIATE 𓃼
-𓃼𓃼𓃼𓃼𓃼𓃼𓃼𓃼𓃼𓃼𓃼𓃼𓃼𓃼𓃼𓃼𓃼𓃼𓃼𓃼
+𓃼𓃼𓃼𓃼𓃼𓃼𓃼𓃼𓃼𓃼𓃼𓃼𓃼𓃼𓃼
 
-╔══════════════════════════════════════════╗
-║         INITIATION DETAILS               ║
-╚══════════════════════════════════════════╝
+╔══════════════════════════════╗
+║     INITIATION DETAILS       ║
+╚══════════════════════════════╝
 
-👤 SHADOW NAME: ${formData.name}
-🎂 AGE CYCLE: ${formData.age}
-⚧ GENDER ESSENCE: ${formData.gender}
-📞 CONTACT FREQUENCY: ${formData.phone}
-📧 DIGITAL ECHO: ${formData.email}
+👤 NAME: ${formData.name}
+🎂 AGE: ${formData.age}
+⚧ GENDER: ${formData.gender}
+📞 PHONE: ${formData.phone}
+📧 EMAIL: ${formData.email}
+🔮 TELEGRAM: ${formData.telegram}
+🏷️ MONIKER: ${formData.moniker}
+⚔️ ROLE: ${formData.role}
 
-🔮 TELEGRAM SHADOW: ${formData.telegram}
-🏷️ SHADOW MONIKER: ${formData.moniker}
-⚔️ SHADOW ARCHETYPE: ${formData.role}
-
-🧠 WEAPONS OF KNOWLEDGE:
+🧠 SKILLS:
 ${formData.skills}
 
-𓃼 OFFICIAL ASSIGNED TAG (OAT) 𓃼
-${formData.oat}
+𓃼 OAT: ${formData.oat}
 
-══════════════════════════════════════════
-📜 CODE ACCEPTED: ✅ YES
-🕯 STATUS: Awaiting Judgment
-⏰ TIMESTAMP: ${formData.timestamp}
-🌐 TIMEZONE: ${formData.timezone}
-══════════════════════════════════════════
+📜 CODE ACCEPTED: ✅
+⏰ TIME: ${formData.timestamp}
 
-𓃼 The Veil has recorded this soul.
-𓃼 The Elders will be notified immediately.
-𓃼 Await judgment via email.
-𓃼 The Silent Ledger never forgets.
-
-𓃼𓃼𓃼𓃼𓃼𓃼𓃼𓃼𓃼𓃼𓃼𓃼𓃼𓃼𓃼𓃼𓃼𓃼𓃼𓃼
+Use /approve or /reject to judge this soul.
                 `;
                 
-                // Send to Telegram bot owner's DM
                 const telegramUrl = `https://api.telegram.org/bot${TELEGRAM_BOT_TOKEN}/sendMessage`;
                 
                 const telegramResponse = await fetch(telegramUrl, {
                     method: 'POST',
-                    headers: { 
-                        'Content-Type': 'application/json'
-                    },
+                    headers: { 'Content-Type': 'application/json' },
                     body: JSON.stringify({
                         chat_id: TELEGRAM_OWNER_ID,
-                        text: message,
-                        parse_mode: 'HTML'
+                        text: message
                     })
                 });
                 
                 const telegramResult = await telegramResponse.json();
                 
                 if (!telegramResult.ok) {
-                    console.error('Telegram API Error:', telegramResult);
-                    throw new Error(telegramResult.description || 'Telegram error');
+                    throw new Error(telegramResult.description);
                 }
                 
-                console.log('✅ Telegram sent successfully to bot owner!', telegramResult);
-                loadingStatus.textContent = 'Telegram delivered! Sending confirmation email...';
+                // Send to backend for email and database
+                await fetch('http://localhost:3000/api/submit', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify(formData)
+                });
                 
-                // Send confirmation email via our backend
-                try {
-                    const emailResponse = await fetch('http://localhost:3000/api/send-email', {
-                        method: 'POST',
-                        headers: {
-                            'Content-Type': 'application/json',
-                        },
-                        body: JSON.stringify({
-                            email: formData.email,
-                            name: formData.name,
-                            oat: formData.oat,
-                            moniker: formData.moniker,
-                            role: formData.role
-                        })
-                    });
-                    
-                    if (emailResponse.ok) {
-                        console.log('✅ Email confirmation sent');
-                        loadingStatus.textContent = 'Email confirmation sent!';
-                    }
-                } catch (emailError) {
-                    console.error('Email error:', emailError);
-                    // Don't fail the submission if email fails
-                }
-                
-                // Store in localStorage for success page
                 localStorage.setItem('shadow_initiate_data', JSON.stringify(formData));
                 
-                // Success message
-                loadingStatus.textContent = 'Initiation complete!';
+                alert(`𓃼 INITIATION RECEIVED 𓃼\n\nThe Elders have been notified.\nCheck your email for the verdict.`);
                 
-                setTimeout(() => {
-                    alert(`𓃼 INITIATION RECEIVED 𓃼\n\nThe Elders have been notified via Telegram.\nCheck your email for the verdict.\n\nYour OAT: ${formData.oat}`);
-                    
-                    // Reset form
-                    form.reset();
-                    oatDisplay.style.display = 'none';
-                    state.oatCopied = false;
-                    state.roleSelected = false;
-                    state.genderSelected = false;
-                    genderButtons.forEach(b => b.classList.remove('selected'));
-                    roleButtons.forEach(b => b.classList.remove('selected'));
-                    roleInput.value = '';
-                    genderInput.value = '';
-                    
-                    // Clear errors
-                    Object.values(errorElements).forEach(el => {
-                        if (el) {
-                            el.textContent = '';
-                            el.classList.remove('error');
-                        }
-                    });
-                    
-                    // Redirect to success page
-                    window.location.href = 'success.html';
-                }, 1500);
+                form.reset();
+                oatDisplay.style.display = 'none';
+                state.oatCopied = false;
+                state.roleSelected = false;
+                state.genderSelected = false;
+                genderButtons.forEach(b => b.classList.remove('selected'));
+                roleButtons.forEach(b => b.classList.remove('selected'));
+                roleInput.value = '';
+                genderInput.value = '';
+                
+                window.location.href = 'success.html';
                 
             } catch (error) {
-                console.error('❌ Submission error:', error);
-                loadingOverlay.style.display = 'none';
-                
-                let errorMessage = 'Failed to send to Telegram. ';
-                
-                if (error.message.includes('bot')) {
-                    errorMessage += 'Invalid bot token. Please check your Telegram bot configuration.';
-                } else if (error.message.includes('chat')) {
-                    errorMessage += 'Invalid chat ID. Please check your owner ID.';
-                } else if (error.message.includes('Network')) {
-                    errorMessage += 'Network error. Check your internet connection.';
-                } else {
-                    errorMessage += error.message;
-                }
-                
-                alert('❌ ' + errorMessage);
+                console.error('Submission error:', error);
+                alert('❌ Failed to send to Telegram. Check your bot token.');
                 
             } finally {
                 loadingOverlay.style.display = 'none';
@@ -1446,7 +1413,8 @@ ${formData.oat}
             }
         });
 
-        // Initialize form validation
+        // Initialize quotes and form
+        rotateQuotes();
         validateForm();
     </script>
 </body>
