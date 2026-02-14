@@ -460,43 +460,90 @@ async function sendApprovalEmail(to, name, oat, moniker, role) {
         subject: '☬ Shadow Lurkers - Initiation APPROVED ☬',
         html: `
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <title>Shadow Lurkers - Approved</title>
+<meta charset="UTF-8">
+<title>Shadow Lurkers — Initiation Accepted</title>
 </head>
-<body style="margin:0; padding:0; background-color:#050008; font-family:'Courier New', monospace; color:#e0e0e0;">
-    <table width="100%" cellpadding="0" cellspacing="0" style="background-color:#050008;">
-        <tr>
-            <td align="center">
-                <table width="600" cellpadding="0" cellspacing="0" style="margin:40px auto; border:2px solid #ff003c; background:#0b0012;">
-                    <tr>
-                        <td align="center" style="padding:30px;">
-                            <h1 style="color:#ff003c; font-size:36px;">☬ APPROVED ☬</h1>
-                            <p style="color:#c77dff; font-size:18px;">The shadows welcome you, ${name}</p>
-                            
-                            <div style="margin:30px 0; padding:20px; border:1px solid #ff003c;">
-                                <p style="color:#aaa;">Your Official Assigned Tag</p>
-                                <p style="color:#ff003c; font-size:24px;">${oat}</p>
-                            </div>
-                            
-                            <div style="margin:30px 0; padding:20px; border:1px solid #c77dff;">
-                                <p style="color:#aaa;">Your Shadow Moniker</p>
-                                <p style="color:#c77dff; font-size:20px;">${moniker}</p>
-                            </div>
-                            
-                            <p style="color:#fff;">Role: ${role}</p>
-                            
-                            <p style="color:#888; margin-top:30px;">
-                                You are now a shadow of the Veil.<br>
-                                The Silent Ledger bears your name forever.
-                            </p>
-                        </td>
-                    </tr>
-                </table>
+<body style="margin:0;padding:0;background:#050008;font-family:'Segoe UI',Arial,sans-serif;color:#e6e6e6;">
+  <table width="100%" cellpadding="0" cellspacing="0" style="background:#050008;">
+    <tr>
+      <td align="center">
+        <table width="600" cellpadding="0" cellspacing="0" style="margin:40px auto;border:1px solid #2b002b;background:#0b0012;box-shadow:0 0 30px rgba(170,0,255,0.3);">
+          
+          <!-- HEADER -->
+          <tr>
+            <td align="center" style="padding:30px;background:#120015;">
+              <h1 style="margin:0;color:#ff003c;letter-spacing:4px;text-shadow:0 0 15px #ff003c;">
+                ☬ SHADOW LURKERS ☬
+              </h1>
+              <p style="margin-top:10px;color:#c77dff;font-size:14px;letter-spacing:2px;">
+                Verdict of the Veil
+              </p>
             </td>
-        </tr>
-    </table>
+          </tr>
+
+          <!-- BODY -->
+          <tr>
+            <td style="padding:30px;">
+              
+              <p style="font-size:16px;line-height:1.7;color:#bbb;">
+                The ritual flames have stabilized.  
+                The glyphs aligned. The Veil has reached its decision.
+              </p>
+
+              <p style="font-size:18px;line-height:1.7;color:#00ffcc;">
+                <strong>Your initiation has been ACCEPTED.</strong>
+              </p>
+
+              <p style="font-size:15px;line-height:1.7;color:#ccc;">
+                The shadows have recognized your presence and etched your name into the Silent Ledger.  
+                From this moment onward, your path is bound to the clan, and your actions echo within the unseen network.
+              </p>
+
+              <div style="margin:25px 0;padding:20px;border:1px solid #ff003c;background:#120015;text-align:center;">
+                <p style="margin:0;font-size:14px;color:#aaa;">
+                  The Veil now summons you to the Recruits Circle
+                </p>
+                <p style="margin:12px 0 0;font-size:16px;color:#ff003c;letter-spacing:1px;">
+                  Enter the sanctum through the encrypted gateway:
+                </p>
+                <p style="margin:14px 0 0;font-size:17px;color:#00ffcc;letter-spacing:1px;">
+                  https://t.me/+gi0lFIpWoJQ1YTY0
+                  Join fast link resets soon 
+                </p>
+              </div>
+
+              <p style="font-size:15px;line-height:1.7;color:#bbb;">
+                Within that chamber, you will receive further instructions, observe the hierarchy,  
+                and begin your transformation from initiate to operative of the Veil.
+              </p>
+
+              <p style="font-size:14px;line-height:1.7;color:#aaa;">
+                Speak little. Observe more. Execute with precision.  
+                The shadows reward discipline and punish arrogance.
+              </p>
+
+              <p style="margin-top:25px;font-size:14px;color:#666;">
+                Remember: your identity is now masked, your steps recorded,  
+                and your loyalty measured by every silent action you take.
+              </p>
+
+            </td>
+          </tr>
+
+          <!-- FOOTER -->
+          <tr>
+            <td align="center" style="padding:20px;background:#08000d;color:#555;font-size:12px;">
+              ☬≛⃝͙☬ Shadow Lurkers Network ☬≛⃝͙☬<br>
+              Automated Initiation Transmission
+            </td>
+          </tr>
+
+        </table>
+      </td>
+    </tr>
+  </table>
 </body>
 </html>
         `
