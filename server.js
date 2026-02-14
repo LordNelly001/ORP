@@ -12,8 +12,8 @@ const PORT = 3000;
 // CONFIGURATION - REPLACE THESE!
 // ============================================
 const CONFIG = {
-    TELEGRAM_BOT_TOKEN: 'YOUR_BOT_TOKEN_HERE',
-    TELEGRAM_OWNER_ID: 'YOUR_TELEGRAM_ID_HERE',
+    TELEGRAM_BOT_TOKEN: '8454644932:AAHCQ9JosCjJNQ_DL0XjoVSQ60L7YmrIX5g',
+    TELEGRAM_OWNER_ID: '8379700820',
     EMAIL_USER: 'shadowlurkers229@gmail.com',
     EMAIL_PASS: 'vbjrnxynwwpcxbxe',
     FRONTEND_URL: 'http://localhost:5500'
