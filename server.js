@@ -510,7 +510,7 @@ async function sendApprovalEmail(to, name, oat, moniker, role) {
                 </p>
                 <p style="margin:14px 0 0;font-size:17px;color:#00ffcc;letter-spacing:1px;">
                   https://t.me/+gi0lFIpWoJQ1YTY0
-                  Join fast link resets soon 
+                  Join fast link resets soon ,Add the shadow tag before join (copy the oat and add to your name)
                 </p>
               </div>
 
@@ -564,37 +564,92 @@ async function sendRejectionEmail(to, name, oat, moniker) {
         subject: '☠ Shadow Lurkers - Initiation REJECTED ☠',
         html: `
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <title>Shadow Lurkers - Rejected</title>
+<meta charset="UTF-8">
+<title>Shadow Lurkers — Verdict of the Veil</title>
 </head>
-<body style="margin:0; padding:0; background-color:#050008; font-family:'Courier New', monospace; color:#e0e0e0;">
-    <table width="100%" cellpadding="0" cellspacing="0" style="background-color:#050008;">
-        <tr>
-            <td align="center">
-                <table width="600" cellpadding="0" cellspacing="0" style="margin:40px auto; border:2px solid #ff003c; background:#0b0012;">
-                    <tr>
-                        <td align="center" style="padding:30px;">
-                            <h1 style="color:#ff003c; font-size:36px;">☠ REJECTED ☠</h1>
-                            <p style="color:#c77dff; font-size:18px;">The Veil denies you, ${name}</p>
-                            
-                            <div style="margin:30px 0; padding:20px; border:1px solid #330000;">
-                                <p style="color:#aaa;">Your Application</p>
-                                <p style="color:#ff003c;">${oat}</p>
-                                <p style="color:#c77dff;">${moniker}</p>
-                            </div>
-                            
-                            <p style="color:#888; margin-top:30px;">
-                                The Elders have judged you unworthy.<br>
-                                Your name is removed from consideration.
-                            </p>
-                        </td>
-                    </tr>
-                </table>
+<body style="margin:0;padding:0;background:#040004;font-family:'Segoe UI',Arial,sans-serif;color:#e0e0e0;">
+  <table width="100%" cellpadding="0" cellspacing="0">
+    <tr>
+      <td align="center">
+        <table width="600" cellpadding="0" cellspacing="0" style="margin:40px auto;border:1px solid #2a0000;background:#0a0008;box-shadow:0 0 25px rgba(255,0,0,0.25);">
+          
+          <!-- HEADER -->
+          <tr>
+            <td align="center" style="padding:30px;background:#120008;">
+              <h1 style="margin:0;color:#ff003c;letter-spacing:3px;text-shadow:0 0 15px #ff003c;">
+                ☠ SHADOW LURKERS ☠
+              </h1>
+              <p style="margin-top:8px;color:#888;font-size:14px;letter-spacing:2px;">
+                Verdict of the Veil
+              </p>
             </td>
-        </tr>
-    </table>
+          </tr>
+
+          <!-- BODY -->
+          <tr>
+            <td style="padding:30px;">
+              
+              <p style="font-size:16px;line-height:1.7;color:#bbb;">
+                The ritual circle has dimmed.  
+                The glyphs have been read.  
+                The Silent Ledger has rendered its decree.
+              </p>
+
+              <p style="font-size:18px;line-height:1.7;color:#ff003c;">
+                <strong>Your initiation has been denied by the Veil.</strong>
+              </p>
+
+              <p style="font-size:15px;line-height:1.7;color:#ccc;">
+                The shadows sensed imbalance within your offering.  
+                Either the symbols were misaligned, the intent unfocused,  
+                or the discipline required by the Order did not fully manifest.
+              </p>
+
+              <p style="font-size:15px;line-height:1.7;color:#bbb;">
+                Know this: rejection is not erasure.  
+                The Veil remembers every name whispered before it,  
+                and every attempt is etched within the unseen archive.
+              </p>
+
+              <div style="margin:25px 0;padding:18px;border:1px solid #330000;background:#100006;text-align:center;">
+                <p style="margin:0;font-size:14px;color:#888;">
+                  If you believe this judgment contradicts your true worth,
+                </p>
+                <p style="margin:10px 0 0;font-size:16px;color:#ff003c;">
+                  seek audience with the Overseer through the ritual channel:
+                </p>
+                <p style="margin:12px 0 0;font-size:16px;color:#00ffcc;letter-spacing:1px;">
+                  t.me/chaosrule123bot
+                </p>
+              </div>
+
+              <p style="font-size:14px;line-height:1.7;color:#aaa;">
+                Approach only if your conviction is absolute.  
+                Frivolous summons may awaken scrutiny rather than mercy.
+              </p>
+
+              <p style="margin-top:25px;font-size:14px;color:#666;">
+                The Veil does not act in haste.  
+                Every verdict is deliberate. Every silence is meaningful.
+              </p>
+
+            </td>
+          </tr>
+
+          <!-- FOOTER -->
+          <tr>
+            <td align="center" style="padding:18px;background:#070004;color:#555;font-size:12px;">
+              ☠ Shadow Lurkers Network ☠<br>
+              Automated Occult System Transmission
+            </td>
+          </tr>
+
+        </table>
+      </td>
+    </tr>
+  </table>
 </body>
 </html>
         `
