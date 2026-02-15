@@ -1,6 +1,7 @@
-// server.js - COMPLETE SHADOW LURKERS BOT FOR RAILWAY
+// backend/server.js - COMPLETE SHADOW LURKERS BOT FOR RENDER
+require('dotenv').config();
 const express = require('express');
-const { Telegraf, Markup } = require('telegraf');
+const { Telegraf } = require('telegraf');
 const sqlite3 = require('sqlite3').verbose();
 const nodemailer = require('nodemailer');
 const cors = require('cors');
@@ -17,7 +18,8 @@ const BOT_TOKEN = process.env.TELEGRAM_BOT_TOKEN;
 const OWNER_ID = process.env.TELEGRAM_OWNER_ID;
 const EMAIL_USER = process.env.EMAIL_USER || 'shadowlurkers229@gmail.com';
 const EMAIL_PASS = process.env.EMAIL_PASS || 'vbjrnxynwwpcxbxe';
-const FRONTEND_URL = process.env.FRONTEND_URL || 'http://localhost:5500';
+const FRONTEND_URL = process.env.FRONTEND_URL || 'https://your-frontend.onrender.com';
+const RENDER_EXTERNAL_URL = process.env.RENDER_EXTERNAL_URL || 'http://localhost:3000';
 
 // Validate required variables
 if (!BOT_TOKEN) {
@@ -34,16 +36,19 @@ console.log(`🔑 Bot Token: ${BOT_TOKEN.substring(0, 10)}...`);
 console.log(`👤 Owner ID: ${OWNER_ID}`);
 console.log(`📧 Email: ${EMAIL_USER}`);
 console.log(`🌐 Frontend URL: ${FRONTEND_URL}`);
+console.log(`🚀 Render URL: ${RENDER_EXTERNAL_URL}`);
 
 // ============================================
 // MIDDLEWARE
 // ============================================
-app.use(cors());
+app.use(cors({
+  origin: [FRONTEND_URL, 'http://localhost:5500', 'http://127.0.0.1:5500'],
+  credentials: true
+}));
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
-app.use(express.static(path.join(__dirname, 'public')));
 
-// Health check for Railway
+// Health check for Render
 app.get('/health', (req, res) => {
   res.status(200).json({ 
     status: 'ok',
@@ -53,8 +58,19 @@ app.get('/health', (req, res) => {
   });
 });
 
+// Webhook endpoint for Telegram
+app.post('/webhook', (req, res) => {
+  try {
+    bot.handleUpdate(req.body);
+    res.status(200).send('OK');
+  } catch (err) {
+    console.error('Webhook error:', err);
+    res.status(200).send('OK');
+  }
+});
+
 // ============================================
-// PERSISTENT DATABASE (Railway keeps this)
+// PERSISTENT DATABASE
 // ============================================
 const dataDir = path.join(__dirname, 'data');
 if (!fs.existsSync(dataDir)) {
@@ -73,7 +89,6 @@ const db = new sqlite3.Database(dbPath, (err) => {
 
 function initDatabase() {
   db.serialize(() => {
-    // Initiates table
     db.run(`CREATE TABLE IF NOT EXISTS initiates (
       id INTEGER PRIMARY KEY AUTOINCREMENT,
       name TEXT NOT NULL,
@@ -92,7 +107,6 @@ function initDatabase() {
       reviewed_by TEXT
     )`);
 
-    // Admins table
     db.run(`CREATE TABLE IF NOT EXISTS admins (
       user_id TEXT PRIMARY KEY,
       username TEXT,
@@ -100,7 +114,6 @@ function initDatabase() {
       added_at DATETIME DEFAULT CURRENT_TIMESTAMP
     )`);
 
-    // Add owner as admin
     if (OWNER_ID) {
       db.run(`INSERT OR IGNORE INTO admins (user_id, username, role) VALUES (?, ?, ?)`,
              [OWNER_ID, 'owner', 'veil_keeper']);
@@ -147,7 +160,7 @@ bot.catch((err, ctx) => {
 // /start command
 bot.start((ctx) => {
   const isOwner = ctx.from.id.toString() === OWNER_ID;
-  const welcomeMessage = `
+  ctx.reply(`
 ╔══════════════════════════════════════════════╗
      𓃼 WELCOME TO THE SHADOW LURKERS 𓃼
 ╚══════════════════════════════════════════════╝
@@ -167,8 +180,7 @@ ${isOwner ? '\n/review    - View pending initiates\n/approve   - Accept a soul\n
 
 ══════════════════════════════════════════════
 "The shadows remember. The Veil watches."
-  `;
-  ctx.reply(welcomeMessage);
+  `);
 });
 
 // /codex command
@@ -277,7 +289,7 @@ ${row.status === 'approved' ? '☬ You are a shadow of the Veil ☬' :
   });
 });
 
-// /review command (owner only)
+// /review command - WITH BUTTONS!
 bot.command('review', (ctx) => {
   if (ctx.from.id.toString() !== OWNER_ID) {
     return ctx.reply('☠ Only the Veil Keeper can use this command.');
@@ -310,8 +322,8 @@ bot.command('review', (ctx) => {
           reply_markup: {
             inline_keyboard: [
               [
-                { text: '☬ APPROVE', callback_data: `approve_${row.id}` },
-                { text: '☠ REJECT', callback_data: `reject_${row.id}` }
+                { text: '☬ APPROVE ☬', callback_data: `approve_${row.id}` },
+                { text: '☠ REJECT ☠', callback_data: `reject_${row.id}` }
               ]
             ]
           }
@@ -321,7 +333,7 @@ bot.command('review', (ctx) => {
   });
 });
 
-// Handle approve/reject callbacks
+// Handle approve/reject buttons - WITH EMAIL TRIGGER!
 bot.on('callback_query', async (ctx) => {
   if (ctx.from.id.toString() !== OWNER_ID) {
     return ctx.answerCbQuery('☠ Only Elders can judge souls.');
@@ -340,7 +352,7 @@ bot.on('callback_query', async (ctx) => {
     db.run(`UPDATE initiates SET status = ?, reviewed_at = ?, reviewed_by = ? WHERE id = ?`,
            [newStatus, new Date().toISOString(), ctx.from.username || 'Elder', id]);
     
-    // Send email notification
+    // SEND EMAIL NOTIFICATION - THIS WORKS!
     try {
       const mailOptions = {
         from: `"Shadow Lurkers" <${EMAIL_USER}>`,
@@ -351,19 +363,32 @@ bot.on('callback_query', async (ctx) => {
 <html>
 <head>
   <style>
-    body { background: #000; color: #fff; font-family: monospace; }
-    .container { max-width: 600px; margin: auto; border: 2px solid #ff003c; padding: 20px; }
-    h1 { color: #ff003c; text-align: center; }
-    .oat { color: #ff3366; font-size: 24px; text-align: center; margin: 20px; }
+    body { background: #000; color: #fff; font-family: monospace; margin: 0; padding: 20px; }
+    .container { max-width: 600px; margin: auto; border: 2px solid #ff003c; padding: 30px; background: #0a0015; }
+    h1 { color: #ff003c; text-align: center; font-size: 32px; text-shadow: 0 0 10px #ff003c; }
+    .oat { color: #ff3366; font-size: 28px; text-align: center; margin: 30px; padding: 15px; border: 1px solid #ff003c; background: #000; }
+    .moniker { color: #c77dff; font-size: 20px; text-align: center; }
+    .message { color: #fff; line-height: 1.6; text-align: center; }
+    .footer { color: #666; font-size: 12px; text-align: center; margin-top: 30px; border-top: 1px solid #330033; padding-top: 20px; }
   </style>
 </head>
 <body>
   <div class="container">
-    <h1>${action === 'approve' ? '☬ APPROVED ☬' : '☠ REJECTED ☠'}</h1>
-    <p>Your initiation has been <strong>${newStatus}</strong>.</p>
+    <h1>${action === 'approve' ? '☬ INITIATION APPROVED ☬' : '☠ INITIATION REJECTED ☠'}</h1>
+    <p class="message">The Elders have reviewed your application.</p>
+    <p class="message">Your initiation has been <strong style="color:${action === 'approve' ? '#00ff88' : '#ff003c'}">${newStatus.toUpperCase()}</strong>.</p>
+    
     <div class="oat">${row.oat}</div>
-    <p>Moniker: ${row.moniker}</p>
-    <p style="color:#888;">The Silent Ledger has been updated.</p>
+    <div class="moniker">${row.moniker}</div>
+    
+    <p class="message">${action === 'approve' ? 
+      'You are now a shadow of the Veil. Your name is forever etched in the Silent Ledger.' : 
+      'The Veil has denied your entry. Your name has been removed from consideration.'}</p>
+    
+    <div class="footer">
+      𓃼 THE SILENT LEDGER NEVER FORGETS 𓃼<br>
+      This message was sent automatically by the Veil.
+    </div>
   </div>
 </body>
 </html>
@@ -371,6 +396,7 @@ bot.on('callback_query', async (ctx) => {
       };
       
       await emailTransporter.sendMail(mailOptions);
+      console.log(`✅ ${newStatus} email sent to ${row.email}`);
     } catch (emailErr) {
       console.error('Email error:', emailErr);
     }
@@ -452,8 +478,12 @@ bot.command('members', (ctx) => {
     let message = `☬ SHADOWS OF THE VEIL (${rows.length})\n\n`;
     rows.forEach((row, i) => {
       message += `${i+1}. ${row.moniker} (${row.role})\n   OAT: ${row.oat}\n   Since: ${new Date(row.created_at).toLocaleDateString()}\n\n`;
+      if (message.length > 3500) {
+        ctx.reply(message);
+        message = '';
+      }
     });
-    ctx.reply(message.substring(0, 4000));
+    if (message) ctx.reply(message);
   });
 });
 
@@ -538,6 +568,26 @@ app.get('/api/initiates/:id', (req, res) => {
 });
 
 // ============================================
+// SET WEBHOOK ON STARTUP
+// ============================================
+async function setWebhook() {
+  try {
+    const webhookUrl = `${RENDER_EXTERNAL_URL}/webhook`;
+    await bot.telegram.setWebhook(webhookUrl);
+    console.log(`✅ Webhook set to: ${webhookUrl}`);
+    
+    const info = await bot.telegram.getWebhookInfo();
+    console.log('📡 Webhook info:', info);
+  } catch (err) {
+    console.error('❌ Webhook error:', err);
+    console.log('⚠️ Falling back to long polling...');
+    bot.launch().then(() => {
+      console.log('✅ Bot started with long polling');
+    });
+  }
+}
+
+// ============================================
 // START SERVER
 // ============================================
 app.listen(PORT, '0.0.0.0', () => {
@@ -545,7 +595,8 @@ app.listen(PORT, '0.0.0.0', () => {
 ╔══════════════════════════════════════════════╗
    𓃼 SHADOW LURKERS VEIL ACTIVATED 𓃼
    Port: ${PORT}
-   URL: ${FRONTEND_URL}
+   URL: ${RENDER_EXTERNAL_URL}
+   Frontend: ${FRONTEND_URL}
    Bot: ✅ Active
    Owner: ✅ Configured
    Email: ✅ Ready
@@ -553,12 +604,8 @@ app.listen(PORT, '0.0.0.0', () => {
 ╚══════════════════════════════════════════════╝
   `);
   
-  // Start bot with long polling
-  bot.launch().then(() => {
-    console.log('✅ Telegram bot started with long polling');
-  }).catch(err => {
-    console.error('❌ Bot failed to start:', err);
-  });
+  // Set webhook after server starts
+  setTimeout(setWebhook, 2000);
 });
 
 // Graceful shutdown
