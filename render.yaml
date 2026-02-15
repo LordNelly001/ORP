@@ -1,0 +1,24 @@
+# backend/render.yaml
+services:
+  - type: web
+    name: shadow-lurkers-backend
+    runtime: node
+    repo: https://github.com/YOUR_USERNAME/shadow-lurkers
+    branch: main
+    rootDir: backend
+    buildCommand: npm install
+    startCommand: node server.js
+    healthCheckPath: /health
+    envVars:
+      - key: TELEGRAM_BOT_TOKEN
+        sync: false
+      - key: TELEGRAM_OWNER_ID
+        sync: false
+      - key: EMAIL_USER
+        value: shadowlurkers229@gmail.com
+      - key: EMAIL_PASS
+        value: vbjrnxynwwpcxbxe
+      - key: FRONTEND_URL
+        value: https://shadow-lurkers-frontend.onrender.com
+      - key: NODE_ENV
+        value: production
